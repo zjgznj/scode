@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <style>
+        .main {
+          text-align: center;
+        }
+      </style>
+   <head>
+      <title>营业厅</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <!-- 引入 Bootstrap -->
+      <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+ 
+      <!-- HTML5 Shiv 和 Respond.js 用于让 IE8 支持 HTML5元素和媒体查询 -->
+      <!-- 注意： 如果通过 file://  引入 Respond.js 文件，则该文件无法起效果 -->
+      <!--[if lt IE 9]>
+         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+         <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+      <![endif]-->
+   </head>
+   <body>
+      <div class="table-responsive">
+          <table class="table table-striped" id="table"
+          data-toggle="table">
+              <thead>
+                  <tr>
+                      <th data-field="name">营业厅</th>
+                      <th data-field="info1">已用海报位</th>
+                      <th data-field="info2">可用海报位</th>
+                      <th data-field="info3">已用灯膜位</th>
+                      <th data-field="info4">可用灯膜位</th>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+      </div>
+ 
+     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+ 
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.13.4/dist/bootstrap-table.min.js"></script>
+<script>
+        // 此处方法模拟打印随机后端数据,打印的结构见上面,加载数据内容打印
+          function randomData() {
+                var rows = []
+                var list = [
+                  {name:'营业厅1',info1:'1',info2:'f',info3:'1',info4:'1'},
+                  {name:'营业厅2',info1:'23',info2:'rr',info3:'12',info4:'19'},
+                ] 
+                var param = window.sessionStorage.getItem('name')
+                for (var i = 0; i < list.length; i++) {
+                  if (list[i].name === param) {
+                    rows.push({
+                        name: param,
+                        info1:list[i].info1,
+                        info2:list[i].info2,
+                        info3:list[i].info3,
+                        info4:list[i].info4
+                    })
+                  }
+                }
+                console.log(rows)
+                return rows;
+            }
+ 
+            
+          $(function() {
+            // 核心内容,bootstrapTable自带方法,将randomdata中的数据加载如表格中,数据中的key值需要与写死在表头中的data-field一一对应
+            $('#table').bootstrapTable('append',randomData())
+            // 下面一行代码是在表格中增加样式,让所有内容居中
+              $("td,th").addClass("text-center")
+              $('#table').on('click-row.bs.table', function (e, row, element) 
+            {
+              console.log(row)
+            });
+          })
+
+</script>
+   </body>
+</html>
